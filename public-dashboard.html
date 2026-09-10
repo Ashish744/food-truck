@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Dashboard — Stackly</title>
+<meta name="description" content="Track your order, see recommended food, loyalty points and upcoming events on your Stackly dashboard.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23E85D2C'/%3E%3Cpath d='M24 8c-1.4 6-7 8.5-7 15.5A7 7 0 0 0 24 30.5a7 7 0 0 0 7-7c0-2.4-1.2-3.6-2.4-4.8.6 2.4-1.2 3.6-2.4 3.6-1.8 0-3-1.4-3-3.4 0-3 2.4-4.8 2.4-8.6-.6-.8-1.2-1.6-1.6-2.3z' fill='%23FFF8EF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<script src="js/auth.js"></script>
+<script>
+  var __session = Auth.requireRole('public');
+  window.addEventListener('pageshow', function(e){ if(e.persisted) Auth.requireRole('public'); });
+</script>
+</head>
+<body class="dashboard-body">
+
+<div class="dash-sidebar-overlay"></div>
+
+<div class="dash-topbar">
+  <div style="display:flex; align-items:center; gap:.8rem;">
+    <button class="dash-hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="index.html" class="brand">
+      <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+    </a>
+  </div>
+  <div class="dash-profile" role="button" tabindex="0" aria-label="Open profile">
+    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&q=60&auto=format&fit=crop" alt="Customer" onerror="handleImgError(this)">
+    <div><div class="dp-name" data-user-name>Customer</div><div class="dp-role">248 loyalty points</div></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</div>
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <button class="dash-sidebar-close" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 16 16"><line x1="1" y1="1" x2="15" y2="15" stroke="currentColor" stroke-width="2"/><line x1="15" y1="1" x2="1" y2="15" stroke="currentColor" stroke-width="2"/></svg></button>
+    <span class="dash-nav-label">Main</span>
+    <a href="#dashboard" class="dash-nav-item is-active" data-scroll="#dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg> Dashboard</a>
+    <a href="#profile" class="dash-nav-item" data-scroll="#profile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0z"/></svg> My Profile</a>
+    <!-- <a href="#overview" class="dash-nav-item" data-scroll="#overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg> Overview</a> -->
+    <a href="#activity" class="dash-nav-item" data-scroll="#activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2.5 7L14 5l2 7h5"/></svg> Activity</a>
+    <a href="#notifications" class="dash-nav-item" data-scroll="#notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg> Notifications</a>
+    <a href="#messages" class="dash-nav-item" data-scroll="#messages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Messages <span class="nav-badge">2</span></a>
+    <a href="#reports" class="dash-nav-item" data-scroll="#reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg> Reports</a>
+    <span class="dash-nav-label">Account</span>
+    <!-- <a href="#settings" class="dash-nav-item" data-scroll="#settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M4 12h2m12 0h2M12 4v2m0 12v2M6.3 6.3l1.4 1.4m8.6 8.6 1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4"/></svg> Settings</a> -->
+    <a href="#help" class="dash-nav-item" data-scroll="#help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.3 1-1.3 1.9"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/></svg> Help &amp; Support</a>
+    <a href="#" class="dash-nav-item is-logout" data-logout><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg> Logout</a>
+  </aside>
+
+  <main class="dash-main">
+
+    <section id="dashboard">
+      <div class="dash-welcome" style="opacity:1; transform:none;">
+        <div>
+          <h2>Good afternoon, <span data-user-first>there</span>.</h2>
+          <p>Truck 01 is 6 minutes from Downtown Plaza — your usual order takes about 8 minutes once placed.</p>
+          <a href="index.html#menu" class="btn btn-primary btn-shine" style="margin-top:1.3rem;" data-magnetic>Order Again</a>
+        </div>
+        <div class="loyalty-chip"><div class="lc-num">248</div><div class="lc-label">Loyalty points</div></div>
+      </div>
+
+      <div class="track-card">
+        <div class="dash-panel-head" style="margin-bottom:0;"><h3>Order #SK-4831 \u2014 in progress</h3><span class="status-pill cooking">Cooking</span></div>
+        <div class="track-steps">
+          <div class="track-line"></div>
+          <div class="track-line-fill"></div>
+          <div class="track-step is-done"><div class="track-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M4 12l5 5 11-11"/></svg></div><div class="track-label">Confirmed</div><div class="track-sub">12:04 PM</div></div>
+          <div class="track-step is-done"><div class="track-dot"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M4 12l5 5 11-11"/></svg></div><div class="track-label">Preparing</div><div class="track-sub">12:06 PM</div></div>
+          <div class="track-step is-current"><div class="track-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/></svg></div><div class="track-label">Cooking</div><div class="track-sub">Now</div></div>
+          <div class="track-step"><div class="track-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg></div><div class="track-label">Ready</div><div class="track-sub">Est. 12:12 PM</div></div>
+          <div class="track-step"><div class="track-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="track-label">Picked Up</div><div class="track-sub">\u2014</div></div>
+        </div>
+      </div>
+
+      <div class="dash-panel" style="opacity:1; transform:none;">
+        <div class="dash-panel-head"><h3>Quick actions</h3></div>
+        <div class="dash-stat-grid quick-actions-grid">
+          <a href="index.html#menu" class="btn btn-ghost" style="flex-direction:column; height:auto; padding:1.1rem; gap:.5rem;">Reorder</a>
+          <a href="index.html#locations" class="btn btn-ghost" style="flex-direction:column; height:auto; padding:1.1rem; gap:.5rem;">Find a Truck</a>
+          <a href="#messages" class="btn btn-ghost" style="flex-direction:column; height:auto; padding:1.1rem; gap:.5rem;">Message Support</a>
+          <a href="services.html" class="btn btn-ghost" style="flex-direction:column; height:auto; padding:1.1rem; gap:.5rem;">Book Catering</a>
+        </div>
+      </div>
+      <div class="dash-split dashboard-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Today's snapshot</h3></div><div class="popular-row"><div class="perk-icon">08m</div><div><div class="pr-name">Average pickup time</div><div class="pr-meta">You are on track for a quick lunch.</div></div></div><div class="popular-row"><div class="perk-icon">4.9</div><div><div class="pr-name">Your recent rating</div><div class="pr-meta">Thanks for helping the crew improve.</div></div></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Next best action</h3></div><p class="dashboard-note">Your usual truck is nearby. Place your order before 12:20 PM to avoid the lunch rush.</p><a href="index.html#menu" class="text-link">Browse today's menu</a></div>
+      </div>
+    </section>
+
+    <section id="profile">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Profile summary</h3><a href="#settings" class="text-link">Edit profile</a></div>
+        <div style="display:flex; align-items:center; gap:1.2rem; flex-wrap:wrap;">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=140&q=70&auto=format&fit=crop" alt="Profile" onerror="handleImgError(this)" style="width:76px; height:76px; border-radius:50%; object-fit:cover;">
+          <div>
+            <div style="font-weight:600; font-size:1.05rem;" data-user-name>Customer</div>
+            <div style="color:var(--d-muted); font-size:.85rem;" data-user-email>customer@stackly.com</div>
+            <div style="color:var(--d-muted); font-size:.8rem; margin-top:.2rem;">Member since June 2024 \u00b7 <span data-user-role>Customer</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Progress to next reward tier</h3></div>
+        <p style="font-size:.85rem; color:var(--d-muted); margin-bottom:.8rem;">248 / 300 points to unlock <strong>Gold Tier</strong> (free delivery on every order).</p>
+        <div class="pr-bar" style="width:100%; height:8px;"><span data-pct="82" style="border-radius:4px;"></span></div>
+      </div>
+      <div class="dash-split profile-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Contact preferences</h3></div><div class="preference-line"><span>Order updates</span><span class="status-pill ready">Enabled</span></div><div class="preference-line"><span>Offers and rewards</span><span class="status-pill ready">Enabled</span></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Member since</h3></div><div class="profile-stat"><strong>June 2024</strong><span>47 orders and counting</span></div><div class="pr-bar profile-progress"><span data-pct="82"></span></div></div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="dash-head">
+        <div><h1>Overview</h1><p>Your activity at a glance.</p></div>
+      </div>
+      <div class="dash-stat-grid">
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16v4H4zM4 10h16v10H4z"/></svg></div><span class="dc-delta up">+3</span></div>
+          <div class="dc-num" data-dash-count="47">0</div>
+          <div class="dc-label">Total orders</div>
+          <svg class="sparkline"></svg>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4l1.5 4.5H18L14.5 13l1.5 4.5-4-3-4 3L9.5 13 6 10.5h4.5z"/></svg></div><span class="dc-delta up">+12</span></div>
+          <div class="dc-num" data-dash-count="248">0</div>
+          <div class="dc-label">Loyalty points</div>
+          <svg class="sparkline"></svg>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-6h2zm0-8h-2V7h2z"/></svg></div><span class="dc-delta up">+1</span></div>
+          <div class="dc-num" data-dash-count="9">0</div>
+          <div class="dc-label">Favorite items</div>
+          <svg class="sparkline"></svg>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0z"/></svg></div><span class="dc-delta up">4.9</span></div>
+          <div class="dc-num" data-dash-count="14">0</div>
+          <div class="dc-label">Reviews written</div>
+          <svg class="sparkline"></svg>
+        </div>
+      </div>
+
+      <div class="dash-split">
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Monthly activity</h3></div>
+            <div class="bar-chart" id="monthly-activity-chart"></div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Recommended for you</h3><a href="index.html#menu" class="text-link">See full menu</a></div>
+            <div class="dash-stat-grid" style="grid-template-columns: repeat(2,1fr); gap:1rem; margin-bottom:0;">
+              <div class="reco-card"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=65&auto=format&fit=crop" alt="Smash Burger" onerror="handleImgError(this)"><div class="reco-card-body"><h4>Smash Burger</h4><div class="rc-price">\u20b9249</div></div></div>
+              <div class="reco-card"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=300&q=65&auto=format&fit=crop" alt="Street Tacos" onerror="handleImgError(this)"><div class="reco-card-body"><h4>Street Tacos</h4><div class="rc-price">\u20b9199</div></div></div>
+              <div class="reco-card"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=300&q=65&auto=format&fit=crop" alt="Churro Bites" onerror="handleImgError(this)"><div class="reco-card-body"><h4>Churro Bites</h4><div class="rc-price">\u20b9139</div></div></div>
+              <div class="reco-card"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68a?w=300&q=65&auto=format&fit=crop" alt="Iced Cold Brew" onerror="handleImgError(this)"><div class="reco-card-body"><h4>Iced Cold Brew</h4><div class="rc-price">\u20b9129</div></div></div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Recent orders</h3><a href="#reports" class="text-link">View all</a></div>
+            <div class="order-row"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="order-id">Smash Burger + Fries</div><div class="order-item">Yesterday, 1:14 PM</div></div><span class="status-pill done">Delivered</span><span class="order-amt">\u20b9428</span></div>
+            <div class="order-row"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="order-id">Street Tacos \u00d72</div><div class="order-item">June 3, 6:40 PM</div></div><span class="status-pill done">Delivered</span><span class="order-amt">\u20b9398</span></div>
+            <div class="order-row"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="order-id">Fired Pizza Slice</div><div class="order-item">May 28, 12:52 PM</div></div><span class="status-pill done">Delivered</span><span class="order-amt">\u20b9159</span></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Current truck location</h3></div>
+            <div style="border-radius: var(--radius-md); overflow:hidden; aspect-ratio: 4/3; position:relative;">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=65&auto=format&fit=crop" alt="Map area near Downtown Plaza" onerror="handleImgError(this)" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div class="popular-row" style="border-bottom:none; padding-top:1rem;">
+              <div style="width:44px; height:44px; border-radius:50%; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <div><div class="pr-name">Truck 01 \u2014 Downtown Plaza</div><div class="pr-meta">6 min away \u00b7 Live now</div></div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Favorite foods</h3></div>
+            <div class="popular-row"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="pr-name">Smash Burger</div><div class="pr-meta">Ordered 14 times</div></div></div>
+            <div class="popular-row"><img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="pr-name">Churro Bites</div><div class="pr-meta">Ordered 9 times</div></div></div>
+            <div class="popular-row"><img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68a?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="pr-name">Iced Cold Brew</div><div class="pr-meta">Ordered 7 times</div></div></div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Offers for you</h3></div>
+            <div class="popular-row"><div style="width:44px;height:44px;border-radius:10px; background: rgba(47,93,80,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F5D50" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div><div><div class="pr-name">15% off — 250 pts</div><div class="pr-meta">Redeem on your next order</div></div></div>
+            <div class="popular-row"><div style="width:44px;height:44px;border-radius:10px; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><div class="pr-name">Weekend BOGO fries</div><div class="pr-meta">Valid Sat \u2013 Sun</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-discover-content">
+        <div class="dash-head">
+          <div><h1>Discover more</h1><p>New reasons to make your next stop a Stackly stop.</p></div>
+        </div>
+        <div class="dash-discover-grid">
+          <div class="dash-panel discover-feature">
+            <div class="dash-panel-head"><h3>This week's pick</h3><span class="status-pill cooking">Popular</span></div>
+            <div class="discover-feature-body">
+              <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=500&q=70&auto=format&fit=crop" alt="Loaded burger with fries" onerror="handleImgError(this)">
+              <div><h3>Fire-Grilled Stack</h3><p>Double patty, smoked cheddar, crisp lettuce, and our house flame sauce.</p><div class="discover-meta"><strong>4.9</strong><span>1,240 orders this month</span></div><a href="index.html#menu" class="btn btn-primary" style="margin-top:1rem;">View menu</a></div>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Truck schedule</h3><a href="index.html#locations" class="text-link">Live locations</a></div>
+            <div class="schedule-row"><span class="schedule-day is-today">Today</span><div><strong>Downtown Plaza</strong><small>11:00 AM - 3:00 PM</small></div><span class="status-pill ready">Live</span></div>
+            <div class="schedule-row"><span class="schedule-day">Tue</span><div><strong>College Area</strong><small>1:00 PM - 4:00 PM</small></div><span class="status-pill preparing">Soon</span></div>
+            <div class="schedule-row"><span class="schedule-day">Fri</span><div><strong>Night Market</strong><small>6:00 PM - 11:00 PM</small></div><span class="status-pill done">Planned</span></div>
+          </div>
+        </div>
+        <div class="dash-panel" style="margin-top:1.1rem;">
+          <div class="dash-panel-head"><h3>Member perks</h3><span class="dc-delta up">3 unlocked</span></div>
+          <div class="dash-perks-grid">
+            <div class="perk-item"><span class="perk-icon">10%</span><div><strong>Silver savings</strong><small>10% off every tenth order</small></div></div>
+            <div class="perk-item"><span class="perk-icon">250</span><div><strong>Points reward</strong><small>Redeem points for free sides</small></div></div>
+            <div class="perk-item"><span class="perk-icon">Gold</span><div><strong>Almost there</strong><small>52 points to free delivery</small></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-split overview-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Top category</h3></div><div class="category-meter"><span>Mains</span><strong>62%</strong><i><b style="width:62%;"></b></i></div><div class="category-meter"><span>Sides</span><strong>24%</strong><i><b style="width:24%;"></b></i></div><div class="category-meter"><span>Drinks</span><strong>14%</strong><i><b style="width:14%;"></b></i></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Your next milestone</h3></div><p class="dashboard-note">52 more points unlock Gold Tier and free delivery on every order.</p><div class="pr-bar milestone-progress"><span data-pct="82"></span></div></div>
+      </div>
+    </section>
+
+    <section id="activity">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Recent activity</h3></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">You placed order #SK-4831</div><div class="notif-time">6 minutes ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">You earned 12 loyalty points</div><div class="notif-time">6 minutes ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">You left a 5-star review for Smash Burger</div><div class="notif-time">Yesterday</div></div></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">You saved Loaded Fries to favorites</div><div class="notif-time">3 days ago</div></div></div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Timeline</h3></div>
+        <div class="timeline" style="padding-left:0;">
+          <div class="timeline-line" style="left:20px;"><div class="timeline-line-fill" style="height:60%;"></div></div>
+          <div class="timeline-steps" style="gap:1.6rem;">
+            <div class="timeline-step" style="grid-template-columns:44px 1fr;"><div class="timeline-num" style="width:44px;height:44px;font-size:.85rem;">Jun</div><div><h4 style="font-size:1rem;">Joined Stackly</h4><p style="margin-top:.2rem;">Created your account and placed your first order.</p></div></div>
+            <div class="timeline-step" style="grid-template-columns:44px 1fr;"><div class="timeline-num" style="width:44px;height:44px;font-size:.85rem;">Aug</div><div><h4 style="font-size:1rem;">Reached Silver Tier</h4><p style="margin-top:.2rem;">Unlocked 10% off after your 10th order.</p></div></div>
+            <div class="timeline-step" style="grid-template-columns:44px 1fr;"><div class="timeline-num" style="width:44px;height:44px;font-size:.85rem;">Now</div><div><h4 style="font-size:1rem;">82% to Gold Tier</h4><p style="margin-top:.2rem;">52 points away from free delivery on every order.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-split activity-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Activity summary</h3></div><div class="activity-stat"><strong>12</strong><span>points earned this week</span></div><div class="activity-stat"><strong>3</strong><span>favorite items updated</span></div></div>
+        <!-- <div class="dash-panel"><div class="dash-panel-head"><h3>Keep the streak</h3></div><p class="dashboard-note">You have visited Stackly twice this month. One more order keeps your monthly streak active.</p><a href="index.html#menu" class="text-link">Order something good</a></div> -->
+      </div>
+    </section>
+
+    <section id="notifications">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Notifications</h3></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">Your order #SK-4831 is being cooked now</div><div class="notif-time">Just now</div></div></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">15% off offer expires in 3 days</div><div class="notif-time">2 hours ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">Truck 04 is now live at Night Market</div><div class="notif-time">Yesterday</div></div></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">You're 52 points from Gold Tier</div><div class="notif-time">2 days ago</div></div></div>
+      </div>
+      <div class="dash-split notification-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Notification preferences</h3></div><div class="preference-line"><span>Order status</span><span class="status-pill ready">On</span></div><div class="preference-line"><span>Member offers</span><span class="status-pill ready">On</span></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Quiet hours</h3></div><p class="dashboard-note">No promotional alerts between 10:00 PM and 8:00 AM.</p><a href="#settings" class="text-link">Manage settings</a></div>
+      </div>
+    </section>
+
+    <section id="messages">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Recent messages</h3></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:50%; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="pr-name">Stackly Support</div><div class="pr-meta">Your refund for order #SK-4790 has been processed.</div></div></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:50%; background: rgba(47,93,80,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F5D50" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="pr-name">Truck 01 Team</div><div class="pr-meta">Thanks for the 5-star review! See you again soon.</div></div></div>
+      </div>
+      <div class="dash-split message-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Start a conversation</h3></div><p class="dashboard-note">Need help with an order, refund, or event booking? Our team can help.</p><a href="contact.html" class="text-link">Contact support</a></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Support hours</h3></div><div class="profile-stat"><strong>9:00 AM - 7:00 PM</strong><span>Monday to Sunday</span></div><span class="status-pill ready">Available today</span></div>
+      </div>
+    </section>
+
+    <section id="reports">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Order history summary</h3></div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Smash Burger + Fries</td><td>Yesterday</td><td></td><td><span class="status-pill done">Delivered</span></td></tr>
+              <tr><td>Street Tacos \u00d72</td><td>Jun 3</td><td></td><td><span class="status-pill done">Delivered</span></td></tr>
+              <tr><td>Fired Pizza Slice</td><td>May 28</td><td></td><td><span class="status-pill done">Delivered</span></td></tr>
+              <tr><td>Loaded Fries</td><td>May 21</td><td></td><td><span class="status-pill done">Delivered</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Upcoming events near you</h3></div>
+        <div class="event-row"><div class="event-date"><span class="ed-day">14</span><span class="ed-mon">Jun</span></div><div><div style="font-weight:600; font-size:.88rem;">Weekend Night Market</div><div style="font-size:.78rem; color:var(--d-muted);">6pm – 11pm · Riverside Lawn</div></div></div>
+        <div class="event-row"><div class="event-date"><span class="ed-day">21</span><span class="ed-mon">Jun</span></div><div><div style="font-weight:600; font-size:.88rem;">College Food Fest</div><div style="font-size:.78rem; color:var(--d-muted);">12pm – 4pm · North Campus</div></div></div>
+        <div class="event-row"><div class="event-date"><span class="ed-day">28</span><span class="ed-mon">Jun</span></div><div><div style="font-weight:600; font-size:.88rem;">Riverside Festival</div><div style="font-size:.78rem; color:var(--d-muted);">10am – 9pm · 3-day event</div></div></div>
+      </div>
+      <div class="dash-split">
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Saved payment methods</h3><a href="#" class="text-link">+ Add new</a></div>
+            <div class="popular-row"><div style="width:42px;height:42px;border-radius:10px; background: rgba(53,97,140,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#35618C" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><div><div class="pr-name">Visa •••• 4821</div><div class="pr-meta">Expires 09/28 · Default</div></div></div>
+            <div class="popular-row"><div style="width:42px;height:42px;border-radius:10px; background: rgba(47,93,80,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F5D50" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><div><div class="pr-name">UPI · aisha@okhdfc</div><div class="pr-meta">Linked May 2026</div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Saved addresses</h3></div>
+            <div class="popular-row"><div style="width:42px;height:42px;border-radius:10px; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><div class="pr-name">Home</div><div class="pr-meta">4B, Palm Residency, Bengaluru</div></div></div>
+            <div class="popular-row"><div style="width:42px;height:42px;border-radius:10px; background: rgba(217,210,194,.35); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8C8577" stroke-width="2"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6"/></svg></div><div><div class="pr-name">Work</div><div class="pr-meta">Stackly Tower, Whitefield</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-split report-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Spending summary</h3></div><div class="report-total">&#8377;1,184</div><div class="pr-meta">Total across your last four orders</div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Export history</h3></div><p class="dashboard-note">Your order history is ready whenever you need it.</p><button type="button" class="btn btn-ghost">Download summary</button></div>
+      </div>
+    </section>
+
+    <section id="settings">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Account settings</h3></div>
+        <div class="field-row">
+          <div class="field"><label for="p-name">Full name</label><input type="text" id="p-name" value="Aisha Rao"></div>
+          <div class="field"><label for="p-email">Email</label><input type="email" id="p-email" value="customer@stackly.com"></div>
+        </div>
+        <label class="checkbox-row" style="margin-bottom:.8rem;"><input type="checkbox" checked> Order status notifications</label>
+        <label class="checkbox-row" style="margin-bottom:.8rem;"><input type="checkbox" checked> Offers &amp; loyalty updates</label>
+        <label class="checkbox-row" style="margin-bottom:1.3rem;"><input type="checkbox"> Weekly newsletter</label>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </section>
+
+    <section id="help">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Helpful tips</h3></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:10px; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div><div><div class="pr-name">Order 10 minutes before you arrive</div><div class="pr-meta">Your food is ready exactly when you get there.</div></div></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:10px; background: rgba(47,93,80,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2F5D50" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1 0-4h12v4"/><path d="M4 6v12a2 2 0 0 0 2 2h14v-4"/><path d="M18 12a2 2 0 0 0 0 4h4v-4z"/></svg></div><div><div class="pr-name">Stack loyalty points with offers</div><div class="pr-meta">Redeem points and weekend deals on the same order.</div></div></div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Help &amp; support</h3></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:50%; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg></div><div><div class="pr-name">hr@stackly.com</div><div class="pr-meta">Response within one business day</div></div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var el = document.getElementById('monthly-activity-chart');
+    if(el) buildBarChart(el, [6,9,7,11,10,13,15], ['Jan','Feb','Mar','Apr','May','Jun','Jul']);
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.dash-main .btn, .dash-main .text-link').forEach(function(action){
+      action.addEventListener('click', function(event){
+        event.preventDefault();
+        window.location.href = '404.html';
+      });
+    });
+    var profile = document.querySelector('.dash-profile');
+    if(profile) profile.addEventListener('click', function(){ window.location.href = '404.html'; });
+  });
+</script>
+</body>
+</html>

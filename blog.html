@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Stories, Recipes & News | Stackly</title>
+<meta name="description" content="Recipes, food truck news, and behind-the-scenes stories from the Stackly kitchen and the road.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23E85D2C'/%3E%3Cpath d='M24 8c-1.4 6-7 8.5-7 15.5A7 7 0 0 0 24 30.5a7 7 0 0 0 7-7c0-2.4-1.2-3.6-2.4-4.8.6 2.4-1.2 3.6-2.4 3.6-1.8 0-3-1.4-3-3.4 0-3 2.4-4.8 2.4-8.6-.6-.8-1.2-1.6-1.6-2.3z' fill='%23FFF8EF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="scroll-progress"></div>
+<div class="page-transition"><img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo brand-logo-transition"></div>
+
+<header>
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn btn-ghost">Log In</a>
+        <a href="create-account.html" class="btn btn-primary btn-shine" data-magnetic>Order Now</a>
+      </div>
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+  <div class="mobile-menu">
+    <div class="mobile-menu-top">
+      <a href="index.html" class="brand">
+        <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+      </a>
+      <button class="close-btn" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 18 18"><line x1="1" y1="1" x2="17" y2="17" stroke="#FFF8EF" stroke-width="2"/><line x1="17" y1="1" x2="1" y2="17" stroke="#FFF8EF" stroke-width="2"/></svg></button>
+    </div>
+    <nav class="mobile-menu-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+    </nav>
+    <div class="mobile-menu-actions">
+      <a href="login.html" class="btn btn-ghost btn-block">Log In</a>
+      <a href="create-account.html" class="btn btn-primary btn-block">Create Account</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"><img src="assets/index1.webp" alt="Overhead shot of street food spread" onerror="handleImgError(this)"></div>
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>/</span><span>Blog</span></div>
+      <h1>Recipes, road stories, and the odd kitchen disaster.</h1>
+      <p class="lead">Notes from the commissary kitchen and six trucks' worth of stories from the street.</p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+
+      <div class="blog-featured" data-reveal>
+        <img src="assets/index5.webp" alt="Street tacos being prepared" onerror="handleImgError(this)">
+        <div class="blog-featured-body">
+          <span class="tag">Featured \u00b7 Recipes</span>
+          <h3>Our smash burger technique, explained in five steps.</h3>
+          <p>The single most-asked question at every truck window: how do you get that crust? Our head chef breaks down the smash technique we use on every patty, every day.</p>
+          <div class="blog-meta"><span>Maya Fernandes</span><span>\u00b7</span><span>June 2, 2026</span><span>\u00b7</span><span>6 min read</span></div>
+          <a href="404.html" class="text-link" style="margin-top:1.4rem;">Read the full story</a>
+        </div>
+      </div>
+
+      <div class="blog-tabs" style="margin-top: 3rem;">
+        <button class="menu-tab is-active" data-cat="all">All</button>
+        <button class="menu-tab" data-cat="recipes">Recipes</button>
+        <button class="menu-tab" data-cat="news">Truck News</button>
+        <button class="menu-tab" data-cat="stories">Food Stories</button>
+        <button class="menu-tab" data-cat="bts">Behind the Scenes</button>
+      </div>
+
+      <div class="blog-grid" data-reveal-group>
+        <article class="blog-card" data-cat="recipes">
+          <div class="blog-card-media"><span class="tag">Recipes</span><img src="assets/index5.webp" alt="Homemade salsa verde" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">May 24, 2026</span>
+            <h4>Five-minute salsa verde you can make at home.</h4>
+            <p>The exact recipe our taco truck uses, scaled down for a home blender.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card" data-cat="news">
+          <div class="blog-card-media"><span class="tag">Truck News</span><img src="https://images.unsplash.com/photo-1583224944844-5b268c057373?w=500&q=70&auto=format&fit=crop" alt="New Stackly truck unveiling" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">May 18, 2026</span>
+            <h4>Truck six is officially on the road.</h4>
+            <p>Meet our newest addition, now running the college area route Tuesdays and Thursdays.</p>
+            <a href="#" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card" data-cat="stories">
+          <div class="blog-card-media"><span class="tag">Food Stories</span><img src="assets/index6.webp" alt="Night market crowd" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">May 10, 2026</span>
+            <h4>Why the night market shift is our favorite.</h4>
+            <p>Chef Omar on cooking for the late crowd and why the energy is different after dark.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card" data-cat="bts">
+          <div class="blog-card-media"><span class="tag">Behind the Scenes</span><img src="assets/index7.webp" alt="Prep in the commissary kitchen" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">May 3, 2026</span>
+            <h4>A 5am shift in the commissary kitchen.</h4>
+            <p>Before any truck rolls out, this is where the day actually starts.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card" data-cat="recipes">
+          <div class="blog-card-media"><span class="tag">Recipes</span><img src="assets/index8.webp" alt="Wood fired pizza dough" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">April 27, 2026</span>
+            <h4>Getting a 60-second pizza char without a wood oven.</h4>
+            <p>A cast-iron method that gets surprisingly close to our truck's results.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card" data-cat="news">
+          <div class="blog-card-media"><span class="tag">Truck News</span><img src="assets/index9.webp" alt="Festival announcement" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">April 19, 2026</span>
+            <h4>We're bringing four trucks to Riverside Festival.</h4>
+            <p>Our biggest single-event deployment yet — here's what to expect.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+         <article class="blog-card" data-cat="news">
+          <div class="blog-card-media"><span class="tag">Truck News</span><img src="assets/index10.webp" alt="New Stackly truck unveiling" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">May 18, 2026</span>
+            <h4>Truck six is officially on the road.</h4>
+            <p>Meet our newest addition, now running the college area route Tuesdays and Thursdays.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+         <article class="blog-card" data-cat="recipes">
+          <div class="blog-card-media"><span class="tag">Recipes</span><img src="assets/index8.webp" alt="Wood fired pizza dough" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">April 27, 2026</span>
+            <h4>Getting a 60-second pizza char without a wood oven.</h4>
+            <p>A cast-iron method that gets surprisingly close to our truck's results.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="story section">
+    <div class="container story-grid">
+      <div class="story-sticky">
+        <div class="story-media">
+          <img src="assets/index2.webp" alt="Stackly team serving food at a street event" onerror="handleImgError(this)">
+        </div>
+      </div>
+      <div class="story-panels">
+        <div class="story-panel" data-reveal>
+          <span class="idx">FIELD NOTES 01</span>
+          <h3>The best food stories start at the window.</h3>
+          <p>Every route has its regulars, its surprise rushes, and one order that becomes part of the truck's folklore. We are collecting the small moments that make street food feel like a shared table.</p>
+          <a href="404.html" class="text-link" style="margin-top:1.2rem;">Read the road journal</a>
+        </div>
+        <div class="story-panel" data-reveal>
+          <span class="idx">FIELD NOTES 02</span>
+          <h3>How a new neighborhood becomes home.</h3>
+          <p>Before we add a stop, we listen: to local shop owners, market crews, and the people who know where the city gets hungry. Here is what we look for when planning the next route.</p>
+          <a href="404.html" class="text-link" style="margin-top:1.2rem;">Explore our routes</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <div>
+          <span class="kicker">Kitchen notebook</span>
+          <h2>Small details. Big flavor.</h2>
+        </div>
+        <p>Fresh ideas from the prep table, the test kitchen, and the people who keep every service moving.</p>
+      </div>
+      <div class="blog-grid" data-reveal-group>
+        <article class="blog-card">
+          <div class="blog-card-media"><span class="tag">Ingredients</span><img src="assets/index3.webp" alt="Fresh herbs and vegetables prepared for service" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">April 12, 2026</span>
+            <h4>The three herbs that wake up every Stackly sauce.</h4>
+            <p>A look at the fresh finish that brings heat, brightness, and balance to the menu.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card">
+          <div class="blog-card-media"><span class="tag">People</span><img src="assets/index4.webp" alt="Chef working in a busy kitchen" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">April 5, 2026</span>
+            <h4>Meet the crew behind the five-minute service.</h4>
+            <p>Three roles, one rhythm, and the hand signals that keep a busy window calm.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+        <article class="blog-card">
+          <div class="blog-card-media"><span class="tag">Techniques</span><img src="assets/index5.webp" alt="Pasta being finished in a pan" onerror="handleImgError(this)"></div>
+          <div class="blog-card-body">
+            <span class="blog-date">March 28, 2026</span>
+            <h4>Why high heat is only half the recipe.</h4>
+            <p>The timing, texture, and final toss that turn a good service into a great one.</p>
+            <a href="404.html" class="text-link" style="margin-top:.9rem;">Read more</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta section mini">
+    <div class="container">
+      <h2>Get new stories before anyone else.</h2>
+      <p>One email a month, no spam, unsubscribe any time.</p>
+      <div class="cta-actions">
+        <a href="404.html" class="btn btn-primary btn-shine" data-magnetic>Subscribe to Updates</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand">
+          <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+        </a>
+        <p>Real ingredients, real fire, real fast. Chasing flavor across the city, one block at a time.</p>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Your email" aria-label="Email for newsletter">
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col"><h5>Explore</h5>
+          <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="blog.html">Blog</a><a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-col"><h5>Services</h5>
+          <a href="404.html">Catering</a><a href="404.html">Corporate Events</a><a href="404.html">Weddings</a><a href="404.html">Festivals</a>
+        </div>
+        <div class="footer-col"><h5>Contact</h5>
+          <a href="mailto:hr@stackly.com">hr@stackly.com</a><span>Suraksha Nagar, Yelenahalli, Begur,<br>Bengaluru, Karnataka - 560068</span><!-- Phone: add number here once available -->
+        </div>
+        <div class="footer-col"><h5>Useful Links</h5>
+          <a href="" data-modal="privacy">Privacy Policy</a><a href="" data-modal="terms">Terms &amp; Conditions</a><a href="login.html">Log In</a><a href="create-account.html">Create Account</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-mid">
+      <div class="social-row">
+        <a class="social-icon" href="404.html" aria-label="Instagram" data-magnetic><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="6"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r=".6" fill="currentColor" stroke="none"/></svg></a>
+        <a class="social-icon" href="404.html" aria-label="Facebook" data-magnetic><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14 8.5h-1.6c-.9 0-1.6.7-1.6 1.6V12h3l-.4 3h-2.6v6"/></svg></a>
+        <a class="social-icon" href="404.html" aria-label="YouTube" data-magnetic><svg viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="4"/><path d="M10.3 9.3v5.4l4.8-2.7z" fill="currentColor" stroke="none"/></svg></a>
+        <a class="social-icon" href="404.html" aria-label="X" data-magnetic><svg viewBox="0 0 24 24"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg></a>
+        <a class="social-icon" href="404.html" aria-label="LinkedIn" data-magnetic><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="7.5" y1="10" x2="7.5" y2="16"/><circle cx="7.5" cy="7" r=".6" fill="currentColor" stroke="none"/><path d="M11 16v-3.5c0-1.4 1-2.2 2.2-2.2 1.2 0 1.8.8 1.8 2.2V16"/><line x1="11" y1="10" x2="11" y2="16"/></svg></a>
+      </div>
+      <div style="display:flex; gap:1.4rem;">
+        <a href="" data-modal="privacy">Privacy Policy</a>
+        <a href="" data-modal="terms">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-kinetic marquee" data-pause="false">
+    <div class="marquee-track">
+      <span>Catch the truck<i></i>Taste the difference<i></i>Catch the truck<i></i>Taste the difference<i></i></span>
+      <span>Catch the truck<i></i>Taste the difference<i></i>Catch the truck<i></i>Taste the difference<i></i></span>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>&copy; 2026 Stackly Food Truck Co. All rights reserved.</span>
+    <div style="display:flex; gap:1.2rem;"><a href="#" data-modal="privacy">Privacy</a><a href="#" data-modal="terms">Terms</a></div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="legal-modal">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close">&times;</button>
+    <div class="modal-content" id="modal-content-privacy">
+      <h3>Privacy Policy</h3>
+      <p>Stackly collects only what we need to take and prepare your order: your name, contact details, and order history. We never sell this information to third parties.</p>
+      <h4>What we collect</h4><p>Account details you provide, order activity, and general location when you use live-tracking features.</p>
+      <h4>How we use it</h4><p>To fulfil orders, send order updates, and improve the menu based on what people actually order.</p>
+      <h4>Your choices</h4><p>You can request a copy of your data or ask us to delete your account at any time from your dashboard settings.</p>
+    </div>
+    <div class="modal-content hidden" id="modal-content-terms">
+      <h3>Terms &amp; Conditions</h3>
+      <p>By ordering from Stackly you agree to pay the listed price at time of order and to collect your order within 20 minutes of the ready notification.</p>
+      <h4>Cancellations</h4><p>Orders can be cancelled free of charge before the truck begins preparation; after that, cancellations are handled case by case.</p>
+      <h4>Booking events</h4><p>Catering bookings require a 30% deposit to secure the date, refundable up to 7 days before the event.</p>
+      <h4>Liability</h4><p>Please tell us about allergies before ordering — our trucks are small kitchens and cannot guarantee a completely allergen-free environment.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/navigation.js"></script>
+<script src="js/animations.js"></script>
+</body>
+</html>

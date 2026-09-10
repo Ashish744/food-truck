@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Log In — Stackly</title>
+<meta name="description" content="Log in to your Stackly account to track orders, save favorites and earn loyalty points.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23E85D2C'/%3E%3Cpath d='M24 8c-1.4 6-7 8.5-7 15.5A7 7 0 0 0 24 30.5a7 7 0 0 0 7-7c0-2.4-1.2-3.6-2.4-4.8.6 2.4-1.2 3.6-2.4 3.6-1.8 0-3-1.4-3-3.4 0-3 2.4-4.8 2.4-8.6-.6-.8-1.2-1.6-1.6-2.3z' fill='%23FFF8EF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="scroll-progress"></div>
+<div class="page-transition"><img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo brand-logo-transition"></div>
+<div class="auth-spinner-overlay" id="auth-spinner">
+  <div class="auth-spinner"></div>
+  <div class="auth-spinner-text" id="auth-spinner-text">Signing you in\u2026</div>
+</div>
+
+<main class="auth-shell">
+  <div class="auth-visual">
+    <img src="assets/index11.webp" alt="Stackly food truck at a city location" onerror="handleImgError(this)">
+    <div class="auth-visual-copy">
+      <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+      <h3>Welcome back to the truck.</h3>
+      <p style="color:var(--muted); margin-top:.7rem; max-width:32ch;">Track your order, reorder favorites, and see your loyalty points in one place.</p>
+    </div>
+  </div>
+
+  <div class="auth-form-side">
+    <div class="auth-card">
+      <a href="index.html" class="brand">
+        <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+      </a>
+      <h1>Log in</h1>
+      <p class="sub">Choose your account type, then enter your details.</p>
+
+      <div class="role-tabs" data-active="public" id="login-role-tabs">
+        <span class="role-tab-bg"></span>
+        <button type="button" class="role-tab is-active" data-role="public">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20a8 8 0 0 1 16 0z"/></svg> Public
+        </button>
+        <button type="button" class="role-tab" data-role="admin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/></svg> Admin
+        </button>
+      </div>
+
+      <div class="auth-alert" id="login-alert"></div>
+
+      <form id="login-form" novalidate>
+        <input type="hidden" id="l-role" value="public">
+        <div class="field">
+          <label for="l-email">Email</label>
+          <input type="email" id="l-email" name="email" placeholder="you@example.com" autocomplete="email" required>
+          <span class="field-msg"></span>
+        </div>
+        <div class="field">
+          <label for="l-password">Password</label>
+          <div class="input-wrap">
+            <input type="password" id="l-password" name="password" placeholder="At least 8 characters" autocomplete="current-password" required>
+            <button type="button" class="pw-toggle" data-target="l-password" aria-label="Show password">
+              <svg class="eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
+              <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M17.9 17.9A10.6 10.6 0 0 1 12 20c-7 0-11-8-11-8a19 19 0 0 1 4.2-5.5M9.9 4.2A9.9 9.9 0 0 1 12 4c7 0 11 8 11 8a19 19 0 0 1-2.2 3.1"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+            </button>
+          </div>
+          <span class="field-msg"></span>
+        </div>
+        <div class="form-foot">
+          <label class="checkbox-row"><input type="checkbox" name="remember"> Remember me</label>
+          <a href="404.html" class="text-link">Forgot password?</a>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-shine">Log In as <span id="login-role-label">Public</span></button>
+        <a href="index.html" class="btn btn-ghost btn-block auth-back-button">Back to Home</a>
+      </form>
+
+      <p class="form-alt">Don't have an account? <a href="create-account.html" class="text-link" style="display:inline-flex;">Create one</a></p>
+      <p class="auth-demo-hint">Demo accounts \u2014 Public: <strong>customer@stackly.com</strong> / <strong>Customer@123</strong>. Admin: <strong>admin@stackly.com</strong> / <strong>Admin@123</strong>.</p>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/validation.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var params = new URLSearchParams(window.location.search);
+    var role = params.get('role');
+    if(role === 'admin' || role === 'public'){
+      var tab = document.querySelector('#login-role-tabs .role-tab[data-role="' + role + '"]');
+      if(tab) tab.click();
+    }
+    if(params.get('registered') === '1'){
+      showAuthAlert('login-alert', 'Account created successfully. Please log in below.', true);
+    }
+  });
+</script>
+</body>
+</html>

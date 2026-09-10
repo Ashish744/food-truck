@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Stackly</title>
+<meta name="description" content="Stackly admin dashboard: revenue, users, orders, menu management, complaints, analytics and event bookings.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23E85D2C'/%3E%3Cpath d='M24 8c-1.4 6-7 8.5-7 15.5A7 7 0 0 0 24 30.5a7 7 0 0 0 7-7c0-2.4-1.2-3.6-2.4-4.8.6 2.4-1.2 3.6-2.4 3.6-1.8 0-3-1.4-3-3.4 0-3 2.4-4.8 2.4-8.6-.6-.8-1.2-1.6-1.6-2.3z' fill='%23FFF8EF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<script src="js/auth.js"></script>
+<script>
+  var __session = Auth.requireRole('admin');
+  window.addEventListener('pageshow', function(e){ if(e.persisted) Auth.requireRole('admin'); });
+</script>
+</head>
+<body class="dashboard-body">
+
+<div class="dash-sidebar-overlay"></div>
+
+<div class="dash-topbar">
+  <div style="display:flex; align-items:center; gap:.8rem;">
+    <button class="dash-hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <a href="index.html" class="brand">
+      <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+    </a>
+  </div>
+  <div class="dash-profile" role="button" tabindex="0" aria-label="Open profile">
+    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&q=60&auto=format&fit=crop" alt="Admin" onerror="handleImgError(this)">
+    <div><div class="dp-name" data-user-name>Admin</div><div class="dp-role">Operations Admin</div></div>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</div>
+
+<div class="dash-layout">
+  <aside class="dash-sidebar">
+    <button class="dash-sidebar-close" aria-label="Close menu"><svg width="16" height="16" viewBox="0 0 16 16"><line x1="1" y1="1" x2="15" y2="15" stroke="currentColor" stroke-width="2"/><line x1="15" y1="1" x2="1" y2="15" stroke="currentColor" stroke-width="2"/></svg></button>
+    <span class="dash-nav-label">Main</span>
+    <a href="#dashboard" class="dash-nav-item is-active" data-scroll="#dashboard"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h5v-6h4v6h5V10"/></svg> Dashboard</a>
+    <!-- <a href="#overview" class="dash-nav-item" data-scroll="#overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="8" height="8" rx="2"/><rect x="13" y="13" width="8" height="8" rx="2"/></svg> Overview</a> -->
+    <a href="#users" class="dash-nav-item" data-scroll="#users"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><circle cx="17.5" cy="9" r="2.8"/><path d="M15.5 13a5.2 5.2 0 0 1 6 5.2"/></svg> Users</a>
+    <a href="#activity" class="dash-nav-item" data-scroll="#activity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 12h4l2.5 7L14 5l2 7h5"/></svg> User Activity</a>
+    <a href="#reports" class="dash-nav-item" data-scroll="#reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2h9l5 5v15H6z"/><path d="M14 2v6h6"/></svg> Reports</a>
+    <a href="#complaints" class="dash-nav-item" data-scroll="#complaints"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="12" y1="8" x2="12" y2="12"/><circle cx="12" cy="15.3" r=".6" fill="currentColor" stroke="none"/></svg> Complaints <span class="nav-badge">3</span></a>
+    <a href="#notifications" class="dash-nav-item" data-scroll="#notifications"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg> Notifications</a>
+    <a href="#content" class="dash-nav-item" data-scroll="#content"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l9 5-9 5-9-5z"/><path d="M3 12l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg> Content Management</a>
+    <a href="#analytics" class="dash-nav-item" data-scroll="#analytics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M12 20V4M20 20v-7"/></svg> Analytics</a>
+    <span class="dash-nav-label">Account</span>
+    <a href="#settings" class="dash-nav-item" data-scroll="#settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M4 12h2m12 0h2M12 4v2m0 12v2M6.3 6.3l1.4 1.4m8.6 8.6 1.4 1.4M17.7 6.3l-1.4 1.4M7.7 16.3l-1.4 1.4"/></svg> Settings</a>
+    <a href="#help" class="dash-nav-item" data-scroll="#help"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.8.4-1.3 1-1.3 1.9"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/></svg> Help &amp; Support</a>
+    <a href="public-dashboard.html" class="dash-nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z"/></svg> Customer view</a>
+    <a href="#" class="dash-nav-item is-logout" data-logout><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5M21 12H9"/></svg> Logout</a>
+  </aside>
+
+  <main class="dash-main">
+
+    <section id="dashboard">
+      <div class="dash-welcome" style="opacity:1; transform:none;">
+        <div>
+          <h2>Welcome back, <span data-user-first>Admin</span>.</h2>
+          <p>Here's what's happening across all six trucks today. Three complaints need a response and two reports are ready to review.</p>
+          <div style="display:flex; gap:.8rem; flex-wrap:wrap; margin-top:1.3rem;">
+            <a href="#content" class="btn btn-primary btn-shine" data-magnetic>+ Add Menu Item</a>
+            <a href="#reports" class="btn btn-ghost" data-magnetic>Export Report</a>
+          </div>
+        </div>
+        <div class="loyalty-chip"><div class="lc-num">98.2%</div><div class="lc-label">System uptime (30d)</div></div>
+      </div>
+
+      <div class="dash-panel" style="opacity:1; transform:none;">
+        <div class="dash-panel-head"><h3>System status</h3><span class="status-pill ready">All systems normal</span></div>
+        <div class="dash-stat-grid" style="grid-template-columns: repeat(4,1fr); margin-bottom:0;">
+          <div class="dash-card" style="opacity:1; transform:none; padding:1rem 1.1rem;"><div class="dc-label">Ordering system</div><div style="display:flex; align-items:center; gap:.5rem; margin-top:.5rem;"><span style="width:8px;height:8px;border-radius:50%;background:#2F5D50;"></span><span style="font-size:.82rem; font-weight:600;">Online</span></div></div>
+          <div class="dash-card" style="opacity:1; transform:none; padding:1rem 1.1rem;"><div class="dc-label">Payments</div><div style="display:flex; align-items:center; gap:.5rem; margin-top:.5rem;"><span style="width:8px;height:8px;border-radius:50%;background:#2F5D50;"></span><span style="font-size:.82rem; font-weight:600;">Online</span></div></div>
+          <div class="dash-card" style="opacity:1; transform:none; padding:1rem 1.1rem;"><div class="dc-label">Live tracking</div><div style="display:flex; align-items:center; gap:.5rem; margin-top:.5rem;"><span style="width:8px;height:8px;border-radius:50%;background:#E8A22C;"></span><span style="font-size:.82rem; font-weight:600;">Degraded</span></div></div>
+          <div class="dash-card" style="opacity:1; transform:none; padding:1rem 1.1rem;"><div class="dc-label">Notifications</div><div style="display:flex; align-items:center; gap:.5rem; margin-top:.5rem;"><span style="width:8px;height:8px;border-radius:50%;background:#2F5D50;"></span><span style="font-size:.82rem; font-weight:600;">Online</span></div></div>
+        </div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Today's priorities</h3><span class="status-pill cooking">4 open</span></div><div class="admin-list-row"><strong>Review complaints</strong><span>3 waiting</span></div><div class="admin-list-row"><strong>Approve route update</strong><span>1 pending</span></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Operations note</h3></div><p class="dashboard-note">Live tracking is degraded for Truck 04. The team is monitoring the route and expects recovery shortly.</p><a href="#notifications" class="text-link dash-nav-item" data-scroll="#notifications" style="display:inline;padding:0;background:none;color:var(--d-flame);">View notifications</a></div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="dash-head">
+        <div><h1>Overview</h1><p>Key numbers across all trucks today.</p></div>
+        <div class="dash-range"><button class="is-active">Today</button><button>Week</button><button>Month</button></div>
+      </div>
+
+      <div class="dash-stat-grid">
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="9" cy="8" r="3.5"/><path d="M2 20a7 7 0 0 1 14 0z"/></svg></div><span class="dc-delta up">+4.6%</span></div>
+          <div class="dc-num" data-dash-count="5980">0</div>
+          <div class="dc-label">Total users</div>
+          <svg class="sparkline"></svg>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 4l1.5 4.5H18L14.5 13l1.5 4.5-4-3-4 3L9.5 13 6 10.5h4.5z"/></svg></div><span class="dc-delta up">+8.1%</span></div>
+          <div class="dc-num" data-dash-count="4120">0</div>
+          <div class="dc-label">Active users (30d)</div>
+          <svg class="sparkline"></svg>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 5v14M5 12h14"/></svg></div><span class="dc-delta up">+12.9%</span></div>
+          <div class="dc-num" data-dash-count="286">0</div>
+          <div class="dc-label">New users this week</div>
+          <svg class="sparkline"></svg>
+        </div>
+        <div class="dash-card">
+          <div class="dash-card-top"><div class="dc-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 15h-2v-2h2zm0-4h-2V7h2z"/></svg></div><span class="dc-delta down">-1.4%</span></div>
+          <div class="dc-num" data-dash-count="14">0</div>
+          <div class="dc-label">Pending requests</div>
+          <svg class="sparkline"></svg>
+        </div>
+      </div>
+
+      <div class="dash-split">
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Revenue — last 7 days</h3><a href="#" class="text-link">Export</a></div>
+            <div class="bar-chart" id="revenue-bar-chart"></div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>User growth — last 7 weeks</h3></div>
+            <div class="bar-chart" id="user-growth-chart"></div>
+          </div>
+        </div>
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Orders by status</h3></div>
+            <div class="donut-wrap">
+              <svg id="orders-donut" viewBox="0 0 104 104" width="104" height="104"></svg>
+              <ul class="donut-legend">
+                <li><i style="background:#E85D2C"></i> Completed — 48%</li>
+                <li><i style="background:#2F5D50"></i> Cooking — 27%</li>
+                <li><i style="background:#35618C"></i> Preparing — 15%</li>
+                <li><i style="background:#D9D2C2"></i> Cancelled — 10%</li>
+              </ul>
+            </div>
+          </div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Active orders</h3><a href="#" class="text-link">View all</a></div>
+            <div class="order-row"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="order-id">#SK-4821</div><div class="order-item">Smash Burger \u00d72</div></div><span class="status-pill cooking">Cooking</span><span class="order-amt">\u20b9627</span></div>
+            <div class="order-row"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="order-id">#SK-4822</div><div class="order-item">Street Tacos \u00d73</div></div><span class="status-pill preparing">Preparing</span><span class="order-amt">\u20b9597</span></div>
+            <div class="order-row"><img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="order-id">#SK-4823</div><div class="order-item">Loaded Fries + Wrap</div></div><span class="status-pill ready">Ready</span><span class="order-amt">\u20b9398</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Revenue target</h3><span class="dc-delta up">78%</span></div><div class="pr-bar admin-progress"><span data-pct="78"></span></div><p class="dashboard-note">12.4L of the 16L monthly target reached.</p></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Attention needed</h3></div><div class="admin-list-row"><strong>Pending requests</strong><span class="status-pill cooking">14</span></div><div class="admin-list-row"><strong>Low stock items</strong><span class="status-pill preparing">6</span></div></div>
+      </div>
+    </section>
+
+    <section id="users">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Recent users</h3><a href="#" class="text-link">View all</a></div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Aisha Rao</td><td>aisha.rao@example.com</td><td>Customer</td><td>2 days ago</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Karan Mehta</td><td>karan.m@example.com</td><td>Customer</td><td>3 days ago</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Priya Desai</td><td>priya.d@example.com</td><td>Customer</td><td>5 days ago</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Farhan Sheikh</td><td>farhan.s@example.com</td><td>Customer</td><td>1 week ago</td><td><span class="status-pill preparing">Pending verification</span></td></tr>
+              <tr><td>Ritu Sen</td><td>ritu.sen@example.com</td><td>Catering client</td><td>1 week ago</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Omar Khan</td><td>omar.k@example.com</td><td>Customer</td><td>2 weeks ago</td><td><span class="status-pill done">Inactive</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Customer statistics</h3></div>
+        <div class="dash-stat-grid" style="grid-template-columns: repeat(3,1fr); margin-bottom:0;">
+          <div class="dash-card" style="opacity:1; transform:none;"><div class="dc-num">5,980</div><div class="dc-label">Total customers</div></div>
+          <div class="dash-card" style="opacity:1; transform:none;"><div class="dc-num">61%</div><div class="dc-label">Repeat customers</div></div>
+          <div class="dash-card" style="opacity:1; transform:none;"><div class="dc-num">4.9</div><div class="dc-label">Average rating</div></div>
+        </div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Verification queue</h3><span class="status-pill preparing">12 pending</span></div><p class="dashboard-note">New customer accounts are waiting for email verification.</p><a href="#users" class="text-link dash-nav-item" data-scroll="#users" style="display:inline;padding:0;background:none;color:var(--d-flame);">Review users</a></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Retention signal</h3></div><div class="admin-stat"><strong>61%</strong><span>customers returned this month</span></div><div class="pr-bar admin-progress"><span data-pct="61"></span></div></div>
+      </div>
+    </section>
+
+    <section id="activity">
+      <div class="dash-split">
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>User activity feed</h3></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">Aisha Rao placed order #SK-4831</div><div class="notif-time">6 minutes ago</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">Karan Mehta redeemed a loyalty reward</div><div class="notif-time">22 minutes ago</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">Priya Desai left a 5-star review</div><div class="notif-time">1 hour ago</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">Farhan Sheikh updated his profile</div><div class="notif-time">3 hours ago</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-blue);"></span><div><div class="notif-text">New account created — Ritu Sen</div><div class="notif-time">Yesterday</div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Admin activity timeline</h3></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-herb);"></span><div><div class="notif-text">You updated the Weddings package pricing</div><div class="notif-time">40 minutes ago</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-herb);"></span><div><div class="notif-text">You paused menu item "Mango Lassi"</div><div class="notif-time">3 hours ago</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-herb);"></span><div><div class="notif-text">You resolved complaint #C-1042</div><div class="notif-time">Yesterday</div></div></div>
+            <div class="notif-item"><span class="notif-dot" style="background:var(--d-herb);"></span><div><div class="notif-text">You approved Truck 06 for Riverside Festival</div><div class="notif-time">2 days ago</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Activity — last 7 days</h3></div>
+        <div class="bar-chart" id="activity-bar-chart"></div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Peak activity window</h3></div><div class="admin-stat"><strong>12-2 PM</strong><span>highest order volume today</span></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Recent admin action</h3></div><p class="dashboard-note">Menu availability was updated for the Night Market route 40 minutes ago.</p><span class="status-pill ready">Completed</span></div>
+      </div>
+    </section>
+
+    <section id="reports">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Recent reports</h3><a href="#" class="text-link">Generate new report</a></div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Report</th><th>Period</th><th>Generated</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Weekly revenue summary</td><td>Jun 2 \u2013 Jun 8</td><td>2 days ago</td><td><span class="status-pill ready">Ready</span></td></tr>
+              <tr><td>Customer satisfaction report</td><td>May 2026</td><td>1 week ago</td><td><span class="status-pill ready">Ready</span></td></tr>
+              <tr><td>Truck performance comparison</td><td>Q2 2026</td><td>2 weeks ago</td><td><span class="status-pill ready">Ready</span></td></tr>
+              <tr><td>Catering bookings report</td><td>Jun 2026</td><td>Generating\u2026</td><td><span class="status-pill preparing">In progress</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Report schedule</h3></div><div class="admin-list-row"><strong>Weekly revenue</strong><span>Every Monday</span></div><div class="admin-list-row"><strong>Fleet performance</strong><span>Monthly</span></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Export status</h3></div><p class="dashboard-note">The June catering report is being prepared and will be ready shortly.</p><span class="status-pill preparing">Generating</span></div>
+      </div>
+    </section>
+
+    <section id="complaints">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Complaints &amp; feedback</h3><span class="status-pill cooking">3 open</span></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-danger);"></span><div><div class="notif-text"><strong>#C-1051</strong> — Order arrived cold at College Area route</div><div class="notif-time">Aisha Rao \u00b7 2 hours ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-danger);"></span><div><div class="notif-text"><strong>#C-1050</strong> — Wrong item delivered, requesting refund</div><div class="notif-time">Karan Mehta \u00b7 5 hours ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-danger);"></span><div><div class="notif-text"><strong>#C-1049</strong> — Long wait time at Night Market</div><div class="notif-time">Omar Khan \u00b7 Yesterday</div></div></div>
+        <div class="notif-item"><span class="notif-dot" style="background:var(--d-herb);"></span><div><div class="notif-text"><strong>#C-1042</strong> — Resolved: replacement issued</div><div class="notif-time">Priya Desai \u00b7 2 days ago</div></div></div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Response rate</h3><span class="dc-delta up">+6%</span></div><div class="admin-stat"><strong>94%</strong><span>complaints answered within one day</span></div></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Most common issue</h3></div><p class="dashboard-note">Late orders account for 42% of this month's complaints. Night Market is the main hotspot.</p><a href="#analytics" class="text-link dash-nav-item" data-scroll="#analytics" style="display:inline;padding:0;background:none;color:var(--d-flame);">Open analytics</a></div>
+      </div>
+    </section>
+
+    <section id="notifications">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Notifications</h3></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">Truck 04 is low on brioche buns</div><div class="notif-time">12 minutes ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">New catering enquiry from Kade &amp; Partners</div><div class="notif-time">1 hour ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">Truck 06 arrived at Riverside Festival</div><div class="notif-time">2 hours ago</div></div></div>
+        <div class="notif-item"><span class="notif-dot"></span><div><div class="notif-text">Weekly payout of \u20b91,28,400 processed</div><div class="notif-time">Yesterday</div></div></div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Unread alerts</h3><span class="status-pill cooking">4 new</span></div><p class="dashboard-note">Two stock alerts and two route updates need your attention.</p></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Notification health</h3></div><div class="admin-stat"><strong>99.4%</strong><span>delivery rate over the last 30 days</span></div></div>
+      </div>
+
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Food truck locations</h3><a href="#" class="text-link">Manage routes</a></div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Truck</th><th>Location</th><th>Status</th><th>Today's hours</th></tr></thead>
+            <tbody>
+              <tr><td>Truck 01</td><td>Downtown Plaza</td><td><span class="status-pill ready">Live</span></td><td>11am \u2013 3pm</td></tr>
+              <tr><td>Truck 02</td><td>Business District</td><td><span class="status-pill ready">Live</span></td><td>12pm \u2013 2pm</td></tr>
+              <tr><td>Truck 03</td><td>College Area</td><td><span class="status-pill preparing">En route</span></td><td>1pm \u2013 4pm</td></tr>
+              <tr><td>Truck 04</td><td>Night Market</td><td><span class="status-pill done">Offline</span></td><td>6pm \u2013 11pm</td></tr>
+              <tr><td>Truck 06</td><td>Riverside Festival</td><td><span class="status-pill ready">Live</span></td><td>10am \u2013 9pm</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Event bookings</h3><a href="#" class="text-link">+ New booking</a></div>
+        <div class="event-row"><div class="event-date"><span class="ed-day">14</span><span class="ed-mon">Jun</span></div><div><div style="font-weight:600; font-size:.88rem;">Kade &amp; Partners — office lunch</div><div style="font-size:.78rem; color:var(--d-muted);">80 guests \u00b7 Full Route package</div></div><span class="status-pill ready" style="margin-left:auto;">Confirmed</span></div>
+        <div class="event-row"><div class="event-date"><span class="ed-day">21</span><span class="ed-mon">Jun</span></div><div><div style="font-weight:600; font-size:.88rem;">Sen\u2013Rao Wedding</div><div style="font-size:.78rem; color:var(--d-muted);">220 guests \u00b7 Custom menu</div></div><span class="status-pill preparing" style="margin-left:auto;">Tasting  </span></div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Content queue</h3><span class="status-pill preparing">3 drafts</span></div><p class="dashboard-note">Three menu updates are waiting for review before publishing.</p><a href="#content" class="text-link dash-nav-item" data-scroll="#content" style="display:inline;padding:0;background:none;color:var(--d-flame);">Review content</a></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Menu health</h3></div><div class="admin-list-row"><strong>Active items</strong><span>42</span></div><div class="admin-list-row"><strong>Paused items</strong><span>3</span></div></div>
+      </div>
+    </section>
+
+    <section id="content">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Menu management</h3><a href="#" class="text-link">+ Add item</a></div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Orders today</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Smash Burger</td><td>Mains</td><td>\u20b9249</td><td>112</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Street Tacos</td><td>Mains</td><td>\u20b9199</td><td>96</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Loaded Fries</td><td>Sides</td><td>\u20b9179</td><td>84</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Fired Pizza Slice</td><td>Mains</td><td>\u20b9159</td><td>61</td><td><span class="status-pill ready">Active</span></td></tr>
+              <tr><td>Grilled Wrap</td><td>Mains</td><td>\u20b9219</td><td>40</td><td><span class="status-pill preparing">Low stock</span></td></tr>
+              <tr><td>Mango Lassi</td><td>Drinks</td><td>\u20b9119</td><td>0</td><td><span class="status-pill done">Paused</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Popular foods this week</h3></div>
+        <div class="popular-row"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="pr-name">Smash Burger</div><div class="pr-meta">742 sold</div></div><div class="pr-bar"><span data-pct="92"></span></div></div>
+        <div class="popular-row"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="pr-name">Street Tacos</div><div class="pr-meta">610 sold</div></div><div class="pr-bar"><span data-pct="76"></span></div></div>
+        <div class="popular-row"><img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"><div><div class="pr-name">Loaded Fries</div><div class="pr-meta">534 sold</div></div><div class="pr-bar"><span data-pct="66"></span></div></div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Forecast</h3><span class="dc-delta up">+11%</span></div><p class="dashboard-note">Revenue is trending above last month, led by Truck 01 and Truck 06.</p></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Analytics note</h3></div><div class="admin-list-row"><strong>Top route</strong><span> </span></div><div class="admin-list-row"><strong>Top category</strong><span></span></div></div>
+      </div>
+    </section>
+
+    <section id="analytics">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Revenue analytics</h3></div>
+        <div class="dash-stat-grid" style="grid-template-columns: repeat(3,1fr); margin-bottom:0;">
+          <div class="dash-card" style="opacity:1; transform:none;"><div class="dc-num">\u20b912.4L</div><div class="dc-label">Revenue this month</div></div>
+          <div class="dash-card" style="opacity:1; transform:none;"><div class="dc-num">\u20b9248</div><div class="dc-label">Avg. order value</div></div>
+          <div class="dash-card" style="opacity:1; transform:none;"><div class="dc-num">+18%</div><div class="dc-label">Growth vs last month</div></div>
+        </div>
+      </div>
+      <div class="dash-split">
+        <div>
+          <div class="dash-panel"><div class="dash-panel-head"><h3>Orders per truck</h3></div><div class="bar-chart" id="truck-orders-chart"></div></div>
+        </div>
+        <div>
+          <div class="dash-panel">
+            <div class="dash-panel-head"><h3>Customer segments</h3></div>
+            <div class="donut-wrap">
+              <svg id="segments-donut" viewBox="0 0 104 104" width="104" height="104"></svg>
+              <ul class="donut-legend">
+                <li><i style="background:#E85D2C"></i> Regulars — 42%</li>
+                <li><i style="background:#2F5D50"></i> Occasional — 33%</li>
+                <li><i style="background:#35618C"></i> Catering — 15%</li>
+                <li><i style="background:#D9D2C2"></i> New — 10%</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Top performing trucks</h3></div>
+        <div class="dash-table-wrap">
+          <table class="dash-table">
+            <thead><tr><th>Truck</th><th>Location</th><th>Orders (30d)</th><th>Revenue</th><th>Rating</th></tr></thead>
+            <tbody>
+              <tr><td>Truck 01 — Smash &amp; Grill</td><td>MG Road</td><td>1,842</td><td>₹4.6L</td><td>4.8 ★</td></tr>
+              <tr><td>Truck 02 — Taco Fiesta</td><td>Koramangala</td><td>1,510</td><td>₹3.9L</td><td>4.7 ★</td></tr>
+              <tr><td>Truck 03 — Wok This Way</td><td>Indiranagar</td><td>1,204</td><td>₹3.1L</td><td>4.5 ★</td></tr>
+              <tr><td>Truck 04 — Pizza Point</td><td>Whitefield</td><td>980</td><td>₹2.4L</td><td>4.6 ★</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Recent complaints</h3><a href="#complaints" class="text-link dash-nav-item" data-scroll="#complaints" style="display:inline;padding:0;background:none;color:var(--d-flame);">View all</a></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:50%; background: rgba(209,68,68,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D14444" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="pr-name">Order #SK-4790</div><div class="pr-meta">Missing item — Loaded Fries not delivered</div></div></div>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:50%; background: rgba(209,68,68,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D14444" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><div class="pr-name">Order #SK-4763</div><div class="pr-meta">Order arrived 20 minutes late</div></div></div>
+      </div>
+    </section>
+
+    <section id="settings">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Account settings</h3></div>
+        <div class="field-row">
+          <div class="field"><label for="s-name">Full name</label><input type="text" id="s-name" value="Dev Anand"></div>
+          <div class="field"><label for="s-email">Email</label><input type="email" id="s-email" value="admin@stackly.com"></div>
+        </div>
+        <label class="checkbox-row" style="margin-bottom:.8rem;"><input type="checkbox" checked> Email me daily revenue summaries</label>
+        <label class="checkbox-row" style="margin-bottom:.8rem;"><input type="checkbox" checked> Notify me about new complaints</label>
+        <label class="checkbox-row" style="margin-bottom:1.3rem;"><input type="checkbox"> Notify me about low stock items</label>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Security check</h3><span class="status-pill ready">Protected</span></div><p class="dashboard-note">Two-factor authentication is enabled for administrator access.</p></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Last sign-in</h3></div><div class="admin-stat"><strong>Today, 9:42 AM</strong><span>Chrome on Windows · Bengaluru</span></div></div>
+      </div>
+    </section>
+
+    <section id="help">
+      <div class="dash-panel">
+        <div class="dash-panel-head"><h3>Help &amp; support</h3></div>
+        <p style="color:var(--d-muted); font-size:.88rem; margin-bottom:1.2rem;">Need help with the admin panel? Reach the Stackly support team any time.</p>
+        <div class="popular-row"><div style="width:42px;height:42px;border-radius:50%; background: rgba(232,93,44,.12); display:flex; align-items:center; justify-content:center; flex-shrink:0;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E85D2C" stroke-width="2"><path d="M3 5h18v14H3z"/><path d="M3 6l9 7 9-7"/></svg></div><div><div class="pr-name">hr@stackly.com</div><div class="pr-meta">Response within one business day</div></div></div>
+      </div>
+      <div class="dash-split admin-extra-panels">
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Admin playbook</h3></div><p class="dashboard-note">Use the reports area for weekly reviews and complaints for urgent customer issues.</p><a href="#reports" class="text-link dash-nav-item" data-scroll="#reports" style="display:inline;padding:0;background:none;color:var(--d-flame);">Open reports</a></div>
+        <div class="dash-panel"><div class="dash-panel-head"><h3>Support availability</h3></div><div class="admin-stat"><strong>Online</strong><span>Stackly operations support is available today.</span></div></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    var extra = [
+      { id: 'user-growth-chart', values: [3200,3450,3700,3900,4300,4700,5100], labels: ['W1','W2','W3','W4','W5','W6','W7'] },
+      { id: 'activity-bar-chart', values: [40,55,48,62,58,70,66], labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'] },
+      { id: 'truck-orders-chart', values: [180,150,90,60,40,220], labels: ['T01','T02','T03','T04','T05','T06'] }
+    ];
+    extra.forEach(function(c){
+      var el = document.getElementById(c.id);
+      if(el) buildBarChart(el, c.values, c.labels);
+    });
+    var seg = document.getElementById('segments-donut');
+    if(seg) buildDonut(seg, [
+      { value: 42, color: '#E85D2C' },
+      { value: 33, color: '#2F5D50' },
+      { value: 15, color: '#35618C' },
+      { value: 10, color: '#D9D2C2' }
+    ]);
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.dash-main .btn, .dash-main .text-link').forEach(function(action){
+      action.addEventListener('click', function(event){
+        event.preventDefault();
+        window.location.href = '404.html';
+      });
+    });
+    var profile = document.querySelector('.dash-profile');
+    if(profile) profile.addEventListener('click', function(){ window.location.href = '404.html'; });
+  });
+</script>
+</body>
+</html>

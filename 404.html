@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Wrong Turn | Stackly</title>
+<meta name="description" content="This page took a wrong turn. Head back home or find your dashboard.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='12' fill='%23E85D2C'/%3E%3Cpath d='M24 8c-1.4 6-7 8.5-7 15.5A7 7 0 0 0 24 30.5a7 7 0 0 0 7-7c0-2.4-1.2-3.6-2.4-4.8.6 2.4-1.2 3.6-2.4 3.6-1.8 0-3-1.4-3-3.4 0-3 2.4-4.8 2.4-8.6-.6-.8-1.2-1.6-1.6-2.3z' fill='%23FFF8EF'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/animations.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+<div class="page-transition"><img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo brand-logo-transition"></div>
+
+<div class="error-page">
+  <div class="error-nav">
+    <a href="index.html" class="brand">
+      <img src="assets/logo/stackly-logo.webp" alt="Stackly" class="brand-logo">
+    </a>
+  </div>
+
+  <div class="error-scene" data-particles="12">
+    <div class="error-clouds">
+      <span class="error-cloud" style="animation-duration:26s;"><svg viewBox="0 0 100 40"><ellipse cx="30" cy="24" rx="26" ry="14" fill="#FFF8EF"/><ellipse cx="60" cy="18" rx="20" ry="12" fill="#FFF8EF"/></svg></span>
+      <span class="error-cloud" style="animation-duration:34s; animation-delay:-10s; top:20%;"><svg viewBox="0 0 100 40"><ellipse cx="30" cy="24" rx="22" ry="12" fill="#FFF8EF"/><ellipse cx="58" cy="18" rx="16" ry="10" fill="#FFF8EF"/></svg></span>
+      <span class="error-cloud" style="animation-duration:20s; animation-delay:-4s; top:45%;"><svg viewBox="0 0 100 40"><ellipse cx="30" cy="24" rx="18" ry="10" fill="#FFF8EF"/><ellipse cx="52" cy="18" rx="14" ry="8" fill="#FFF8EF"/></svg></span>
+    </div>
+
+    <div class="error-404">4<span>0</span>4</div>
+    <h1 class="error-headline">Looks like this food truck took a wrong turn.</h1>
+    <p class="error-sub">The page you're looking for isn't on today's route.</p>
+
+    <div class="error-road-wrap">
+      <div class="error-food" style="top:6%; left:8%;"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"></div>
+      <div class="error-food" style="top:0%; right:10%;"><img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"></div>
+      <div class="error-food" style="top:22%; right:26%;"><img src="https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?w=100&q=60&auto=format&fit=crop" alt="" onerror="handleImgError(this)"></div>
+      <div class="error-truck">
+        <svg viewBox="0 0 220 110" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="28" width="132" height="52" rx="10" fill="#E85D2C"/>
+          <rect x="20" y="38" width="52" height="26" rx="4" fill="#14110F" opacity=".18"/>
+          <circle cx="46" cy="38" r="4" fill="#FFF8EF" opacity=".5"/>
+          <path d="M140 46h38l22 22v12h-60z" fill="#F3EDE4"/>
+          <rect x="150" y="54" width="20" height="14" rx="2" fill="#8A8377" opacity=".4"/>
+          <circle class="wheel" cx="55" cy="86" r="17" fill="#14110F"/>
+          <circle cx="55" cy="86" r="6" fill="#8A8377"/>
+          <circle class="wheel" cx="167" cy="86" r="17" fill="#14110F"/>
+          <circle cx="167" cy="86" r="6" fill="#8A8377"/>
+          <circle cx="196" cy="60" r="4" fill="#FFF8EF"/>
+        </svg>
+      </div>
+      <div class="error-road"></div>
+    </div>
+
+    <div class="error-actions">
+      <button type="button" id="btn-back" class="btn btn-ghost error-btn back" data-magnetic>Back</button>
+      <a href="index.html" id="btn-home" class="btn btn-primary btn-shine error-btn" data-magnetic>Home</a>
+      <!-- <a href="public-dashboard.html" id="btn-dash" class="btn btn-ghost error-btn" data-magnetic>Dashboard</a> -->
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/animations.js"></script>
+<script>
+  function play404Entrance(){
+    if(window.Stackly && Stackly.reducedMotion) return;
+    gsap.timeline({ delay: .1 })
+      .from('.error-404', { opacity: 0, y: 70, scale: .82, duration: 1, ease: 'back.out(1.5)' })
+      .from('.error-headline', { opacity: 0, y: 22, duration: .7, ease: 'power3.out' }, '-=.45')
+      .from('.error-sub', { opacity: 0, y: 18, duration: .6, ease: 'power3.out' }, '-=.4')
+      .from('.error-road-wrap', { opacity: 0, y: 30, duration: .8, ease: 'power3.out' }, '-=.3')
+      .from('.error-actions .btn', { opacity: 0, y: 20, duration: .55, stagger: .1, ease: 'power3.out' }, '-=.4');
+  }
+  if(document.body.classList.contains('is-ready')){ play404Entrance(); }
+  else{ document.addEventListener('roam:loaded', play404Entrance, { once: true }); }
+
+  document.getElementById('btn-back').addEventListener('click', () => {
+    const overlay = document.querySelector('.page-transition');
+    const go = () => { if(window.history.length > 1){ window.history.back(); } else { window.location.href = 'index.html'; } };
+    if(window.gsap && overlay && !(window.Stackly && Stackly.reducedMotion)){
+      gsap.timeline({ onComplete: go }).set(overlay,{display:'flex'}).to(overlay,{ y:'0%', duration:.5, ease:'power3.inOut' });
+    } else { go(); }
+  });
+</script>
+</body>
+</html>
