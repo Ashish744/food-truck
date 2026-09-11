@@ -197,7 +197,7 @@ function initDashSidebarMobile(){
   });
   overlay?.addEventListener('click', close);
   closeBtn?.addEventListener('click', close);
-  sidebar.querySelectorAll('.dash-nav-item').forEach(item => item.addEventListener('click', close));
+  sidebar.querySelectorAll('.dash-nav-item').forEach(item => item.addEventListener('click', close, true));
   window.addEventListener('keydown', (e) => { if(e.key === 'Escape') close(); });
   window.addEventListener('resize', () => { if(window.innerWidth > 860) close(); });
 }
@@ -226,9 +226,9 @@ document.addEventListener('DOMContentLoaded', () => {
   animateOrderTracking();
   animateCountersOnView();
   initPopularBars();
+  initDashSidebarMobile();
   initSidebarNav();
   initDashRange();
-  initDashSidebarMobile();
   initLogoutButtons();
   personalizeDashboard();
 

@@ -120,6 +120,20 @@ function setupContactForm(){
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const requiredFields = [
+      ['c-first', 'First name is required.'],
+      ['c-last', 'Last name is required.'],
+      ['c-email', 'Email is required.'],
+      ['c-subject', 'Subject is required.'],
+      ['c-message', 'Message is required.']
+    ];
+    const emptyRequired = requiredFields.filter(([id]) => document.getElementById(id).value.trim() === '');
+    emptyRequired.forEach(([id, message]) => {
+      const input = document.getElementById(id);
+      setFieldState(input.closest('.field'), false, message);
+    });
+    if(emptyRequired.length) return;
+
     const results = [checkFirst?.(), checkLast?.(), checkEmail?.(), checkSubject?.(), checkMessage?.()];
     if(document.getElementById('c-phone').value.trim() !== '') results.push(checkPhone?.());
     if(results.some(r => r === false || r === null)) return;
@@ -131,6 +145,11 @@ function setupContactForm(){
     form.reset();
     form.querySelectorAll('.field').forEach(clearFieldState);
     showFormSuccess(form, 'Message sent — we\u2019ll get back to you within a day.', () => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      if(submitButton){
+        submitButton.innerHTML = 'Send Message';
+        submitButton.disabled = false;
+      }
       window.location.href = '404.html';
     });
   });
