@@ -354,7 +354,7 @@ body.menu-open{ overflow: hidden; }
 .hero-shape.s1{ width:420px; height:420px; background: var(--flame); top:-10%; right:-6%; }
 .hero-shape.s2{ width:320px; height:320px; background: var(--herb); bottom:-8%; left:-6%; opacity:.35; }
 
-.hero .container{ display:grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem,5vw,4rem); align-items:center; position:relative; z-index:2; }
+.hero .container{ display:grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: clamp(2rem,5vw,4rem); align-items:center; position:relative; z-index:2; }
 .hero-status{
   display:inline-flex; align-items:center; gap:.55rem;
   padding: .5rem .95rem; border-radius: var(--radius-pill);
@@ -370,6 +370,7 @@ body.menu-open{ overflow: hidden; }
 .hero-title .line{ display:block; overflow:hidden; }
 .hero-title .line span{ display:inline-block; will-change: transform; }
 .hero-title em{ font-style: italic; color: var(--flame); font-weight: 500; }
+.hero-morph-word{ display:inline-block; min-width: 11ch; color: var(--flame); font-style: italic; font-weight: 500; }
 
 .hero-desc{ margin-top: 1.6rem; max-width: 46ch; color: var(--muted); font-size: var(--step-1); }
 .hero-ctas{ display:flex; flex-wrap:wrap; gap: 1rem; margin-top: 2.2rem; }
@@ -378,8 +379,8 @@ body.menu-open{ overflow: hidden; }
 .hero-stat .num{ font-family: var(--font-display); font-size: var(--step-3); color: var(--paper); }
 .hero-stat .label{ font-size: var(--step--1); color: var(--muted); }
 
-.hero-visual{ position: relative; height: clamp(360px, 46vw, 620px); }
-.hero-visual-frame{ position:absolute; inset: 6% 4%; border-radius: var(--radius-lg); overflow:hidden; box-shadow: var(--shadow-lift); }
+.hero-visual{ position: relative; min-width:0; height: clamp(360px, 46vw, 620px); }
+.hero-visual-frame{ position:absolute; inset: 6% 0; border-radius: var(--radius-lg); overflow:hidden; box-shadow: var(--shadow-lift); }
 .hero-visual-frame img{ width:100%; height:100%; object-fit:cover; }
 .float-card{
   position:absolute; background: var(--paper); color: var(--ink);
@@ -691,6 +692,7 @@ body.menu-open{ overflow: hidden; }
 .breadcrumb{ display:flex; gap:.5rem; align-items:center; font-size: var(--step--1); color: var(--muted); margin-bottom: 1.3rem; }
 .breadcrumb a{ color: var(--muted); } .breadcrumb a:hover{ color: var(--paper); }
 .page-hero h1{ font-size: var(--step-5); max-width: 20ch; }
+.page-hero-letter{ display:inline-block; will-change: transform, opacity; }
 .page-hero p.lead{ margin-top:1rem; color: var(--muted); max-width: 62ch; font-size: var(--step-1); }
 
 /* ---------------------------------------------------------------------- */
