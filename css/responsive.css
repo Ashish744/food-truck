@@ -35,7 +35,8 @@
 }
 
 @media (max-width: 768px){
-  :root{ --nav-h: 68px; }
+  :root{ --nav-h: 60px; }
+  .navbar .brand-logo{ height: 44px; }
   .section{ padding-block: 3.6rem; }
   .h-panel{ flex-basis: 78vw; height: 420px; }
   .h-panel.h-title{ flex-basis: 70vw; }

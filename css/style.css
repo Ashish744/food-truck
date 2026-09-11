@@ -47,7 +47,7 @@
   --radius-md: 18px;
   --radius-lg: 28px;
   --radius-pill: 999px;
-  --nav-h: 76px;
+  --nav-h: 64px;
   --ease-out: cubic-bezier(.16,.84,.44,1);
   --ease-in-out: cubic-bezier(.65,0,.35,1);
 }
@@ -200,7 +200,7 @@ h1,h2,h3,h4{
 .brand-mark{ display:flex; align-items:center; justify-content:center; }
 .brand-mark svg{ width: 40px; height: 40px; }
 .brand-logo{ display:block; height: 34px; width:auto; object-fit:contain; }
-.navbar .brand-logo{ height: 34px; }
+.navbar .brand-logo{ height: 52px; }
 .mobile-menu-top .brand-logo{ height: 30px; }
 .footer-brand .brand-logo{ height: 40px; margin-bottom: .2rem; }
 .auth-card .brand-logo{ height: 32px; margin-bottom: .4rem; }
